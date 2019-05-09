@@ -8,8 +8,7 @@ import qualified Data.ByteString.Char8  as C
 import qualified Data.ByteString.Base64 as Base64
 import qualified Data.Text.IO           as T
 import qualified Data.Text.Encoding     as E
-import           System.Console.Pretty (Color (..), Style (..), bgColor, color,
-                                            style, supportsPretty)
+import           System.Console.Pretty (Color (..),  color)
 
 type Kind    = B.ByteString
 type KeyPath = [(B.ByteString, B.ByteString)]
