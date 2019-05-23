@@ -8,6 +8,7 @@ A command line tool to decode resource id
 
 ## Usage
 <p align="center"><img src="/img/demo.gif?raw=true"/></p>
+
 `rid QWNjb3VudB8xNzc0MDg1Mw`
 
 ## TODO
