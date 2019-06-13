@@ -1,10 +1,14 @@
-module Data.KeyEncode where
+{-# LANGUAGE OverloadedStrings #-}
+module Data.KeyEncode (encode, displayEncode) where
 
 import           Data.Char
 import           Data.Key
+import           Data.KeyDisplay
 import qualified Data.ByteString        as B
 import qualified Data.ByteString.Base64 as Base64
 import qualified Data.ByteString.Char8  as C
+import qualified Data.Text.IO           as TIO
+import           System.Console.Pretty (Color (..),  color)
 
 data KeyPath' = Empty | Element {kind' :: Kind, id' :: Maybe Identifier, parent' :: KeyPath'}
 
@@ -18,10 +22,10 @@ appendKeyId :: B.ByteString -> Integer -> KeyPath' -> KeyPath'
 appendKeyId k' i' = Element k' (Just $ Id i')
 
 
-toKey :: KeyPath' -> Maybe Key
-toKey Empty = Nothing
-toKey (Element k' Nothing p') = Nothing
-toKey (Element k' (Just i') p') = Just $ Key k' i' (toKey p') Nothing
+toKey :: KeyPath' -> Maybe B.ByteString -> Maybe Key
+toKey Empty ns = Nothing
+toKey (Element k' Nothing p') ns = Nothing
+toKey (Element k' (Just i') p') ns = Just $ Key k' i' (toKey p' ns) ns
 
 roundUpChar :: B.ByteString -> B.ByteString
 roundUpChar input = if modulo == 0 then input else B.append input (C.replicate (4 - modulo) '=')
@@ -40,13 +44,18 @@ secondSplit = foldl parseId Empty
 
 
 decode' :: B.ByteString -> Maybe Key
-decode' input = case toKey path of
-                    Nothing -> Nothing
-                    Just key -> Just $ Key (kind key) (identifier key) (parent key) Nothing
+decode' input = case path of
+                    Empty -> Nothing
+                    Element k' Nothing p' -> toKey p' (Just k')
+                    _ -> toKey path Nothing
     where path = secondSplit . firstSplit $ input
 
 
 encode :: B.ByteString -> Maybe Key
 encode = either (const Nothing) decode' . Base64.decode . roundUpChar
 
-encodeI = Base64.decode . roundUpChar
+
+displayEncode :: String -> IO ()
+displayEncode input = case encode . C.pack $ input of
+    Nothing -> putStrLn (color Red "incorrect input")
+    Just key ->  TIO.putStrLn $ displayKey key
