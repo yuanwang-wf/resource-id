@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Data.KeyEncode (encode, displayEncode) where
+module Data.KeyEncode (displayEncode) where
 
 import           Data.Char
 import           Data.Key

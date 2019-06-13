@@ -11,6 +11,7 @@ A command line tool to decode resource id
 
 `rid QWNjb3VudB8xNzc0MDg1Mw`
 `rid UHJvamVjdDozNjM5NDVENkIwOEQ1RDg5OUVEMzI5OTI1MDUxMUMxMw==`
+`rid UHJvamVjdB4zNjM5NDVENkIwOEQ1RDg5OUVEMzI5OTI1MDUxMUMxMw`
 
 # How to display key
 
