@@ -2,9 +2,10 @@
 
 A command line tool to decode resource id
 
-## Install
+## Install via nix
 
-`stack install`
+`nix-build`
+
 
 ## Usage
 <p align="center"><img src="/img/demo.gif?raw=true"/></p>
