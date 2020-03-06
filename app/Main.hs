@@ -1,13 +1,21 @@
 module Main where
 
-import qualified Data.ByteString.Char8  as C
+import qualified Data.ByteString.Char8 as C
 import           Lib
+import qualified Options.Applicative   as OA
 import           System.Environment
 import           System.Exit
 
+data Config = Config
+  { rid    :: String
+  , decode :: Bool
+  }
+
+config :: OA.Parser Config
+config = error ""
 
 work :: String -> IO ()
-work = display . decode . C.pack
+work = display . Lib.decode . C.pack
 
 main :: IO ()
 main = do

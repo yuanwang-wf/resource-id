@@ -31,10 +31,14 @@ pairUp []                 = Right []
 pairUp (kind: name: rest) = ((kind, name) :) <$> pairUp rest
 pairUp _                  = Left "unmatch kind name"
 
-
 keyPathToPrettyText :: KeyPath -> T.Text
 keyPathToPrettyText paths = color Default "Key(" `T.append`
-                            (T.intercalate ", " $ foldl (\ ls (kind, name) -> ls ++ [color Blue (E.decodeUtf8 kind), color Green (E.decodeUtf8 name)]) [] paths)
+                            T.intercalate ", "
+                            (foldl
+                             (\ ls (kind, name) ->
+                                ls ++ [color Blue (E.decodeUtf8 kind), color Green (E.decodeUtf8 name)])
+                              []
+                              paths)
                             `T.append` color Default ")"
 
 displayKeyPath :: KeyPath -> IO ()

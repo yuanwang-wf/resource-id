@@ -1,11 +1,5 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
---
--- see: https://github.com/sol/hpack
---
--- hash: 8fc55b2c465ed835d94682fcd9af94e9cf2306d01e11b2cce73dbef57cd68e32
-
 name:           resource-id
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/yuanwang-wf/resource-id#readme>
@@ -38,6 +32,7 @@ library
     , bytestring
     , pretty-terminal
     , text
+    , optparse-applicative
   default-language: Haskell2010
 
 executable rid
@@ -54,6 +49,7 @@ executable rid
     , pretty-terminal
     , resource-id
     , text
+    , optparse-applicative
   default-language: Haskell2010
 
 test-suite resource-id-test
