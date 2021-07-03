@@ -24,6 +24,7 @@ haskellPackages.shellFor {
       cabal2nix
       stylish-haskell
       hoogle
+      cabal-install
       (all-hies.selection {selector = p: {inherit (p) ghc865; };})
-    ] ++ [pinnedPkgs.cabal-install];
+    ];
 }
